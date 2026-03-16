@@ -25,10 +25,10 @@ const RegisterSchema = z.object({
     password: z.string().min(1, "password is required"),
     confirmPassword: z.string(),
 })
-.refine((data) => data.password === data.confirmPassword, {
-    message: "Passowrd dont't match",
-    path: ["confirmPassword"]
-});
+    .refine((data) => data.password === data.confirmPassword, {
+        message: "Passowrd dont't match",
+        path: ["confirmPassword"]
+    });
 
 type RegisterFormValues = z.infer<typeof RegisterSchema>;
 
@@ -40,7 +40,7 @@ export function RegisterForm() {
         defaultValues: {
             email: "",
             password: "",
-            confirmPassword:""
+            confirmPassword: ""
         }
     })
 
@@ -51,14 +51,14 @@ export function RegisterForm() {
             password: values.password,
             callbackURL: "/",
         },
-    {
-        onSuccess: () => {
-            router.push("/");
-        },
-        onError: (ctx) => {
-            toast.error(ctx.error.message);
-        }
-    })
+            {
+                onSuccess: () => {
+                    router.push("/");
+                },
+                onError: (ctx) => {
+                    toast.error(ctx.error.message);
+                }
+            })
     }
 
     const isPending = form.formState.isSubmitting;
@@ -80,86 +80,92 @@ export function RegisterForm() {
                             <div className="grid gap-6">
                                 <div className="flex flex-col gap-4">
                                     <Button
-                                    variant="outline"
-                                    className="w-full"
-                                    type="button"
-                                    disabled={isPending}>
+                                        variant="outline"
+                                        className="w-full"
+                                        type="button"
+                                        disabled={isPending}>
+                                        <Image alt="Github"
+                                            src="/logos/github.svg"
+                                            width={20} height={20} />
                                         Continue with Github
                                     </Button>
 
                                     <Button
-                                    variant="outline"
-                                    className="w-full"
-                                    type="button"
-                                    disabled={isPending}>
+                                        variant="outline"
+                                        className="w-full"
+                                        type="button"
+                                        disabled={isPending}>
+                                        <Image alt="Github"
+                                            src="/logos/google.svg"
+                                            width={20} height={20} />
                                         Continue with Google
                                     </Button>
                                 </div>
                                 <div className="grid gap-6">
                                     <FormField
-                                    control={form.control}
-                                    name="email"
-                                    render={({field}) => (
-                                        <FormItem>
-                                            <FormLabel>
-                                                Email
-                                            </FormLabel>
-                                            <FormControl>
-                                                <Input
-                                                type="email"
-                                                placeholder="m@example.com"
-                                                {...field}
-                                            />
-                                            </FormControl>
-                                        </FormItem>
-                                    )}/>
+                                        control={form.control}
+                                        name="email"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>
+                                                    Email
+                                                </FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        type="email"
+                                                        placeholder="m@example.com"
+                                                        {...field}
+                                                    />
+                                                </FormControl>
+                                            </FormItem>
+                                        )} />
                                     <FormField
-                                    control={form.control}
-                                    name="password"
-                                    render={({field}) => (
-                                        <FormItem>
-                                            <FormLabel>
-                                                Password
-                                            </FormLabel>
-                                            <FormControl>
-                                                <Input
-                                                type="password"
-                                                placeholder="*******"
-                                                {...field}
-                                            />
-                                            </FormControl>
-                                        </FormItem>
-                                    )}/> 
+                                        control={form.control}
+                                        name="password"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>
+                                                    Password
+                                                </FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        type="password"
+                                                        placeholder="*******"
+                                                        {...field}
+                                                    />
+                                                </FormControl>
+                                            </FormItem>
+                                        )} />
                                     <FormField
-                                    control={form.control}
-                                    name="confirmPassword"
-                                    render={({field}) => (
-                                        <FormItem>
-                                            <FormLabel>
-                                               Confirm Password
-                                            </FormLabel>
-                                            <FormControl>
-                                                <Input
-                                                type="password"
-                                                placeholder="*******"
-                                                {...field}
-                                            />
-                                            </FormControl>
-                                        </FormItem>
-                                    )}/>
-                                    <Button 
-                                     type="submit"
-                                     className="w-full"
-                                     disabled= {isPending}
-                                     >
+                                        control={form.control}
+                                        name="confirmPassword"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>
+                                                    Confirm Password
+                                                </FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        type="password"
+                                                        placeholder="*******"
+                                                        {...field}
+                                                    />
+                                                </FormControl>
+                                            </FormItem>
+                                        )} />
+                                    <Button
+                                        type="submit"
+                                        className="w-full"
+                                        disabled={isPending}
+                                    >
                                         Signup
                                     </Button>
                                 </div>
                                 <div className="text-center text-sm">
                                     Allready have an account?{" "}
                                     <Link
-                                    href="/login"
-                                    className="underline underline-offset-4">
+                                        href="/login"
+                                        className="underline underline-offset-4">
                                         Login
                                     </Link>
                                 </div>

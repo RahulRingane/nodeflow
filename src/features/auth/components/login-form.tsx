@@ -1,4 +1,4 @@
-"use-client"
+"use client"
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
@@ -77,6 +77,9 @@ export function LoginForm() {
                                     className="w-full"
                                     type="button"
                                     disabled={isPending}>
+                                        <Image alt="Github"
+                                        src="/logos/github.svg"
+                                        width={20} height={20}/>
                                         Continue with Github
                                     </Button>
 
@@ -85,6 +88,9 @@ export function LoginForm() {
                                     className="w-full"
                                     type="button"
                                     disabled={isPending}>
+                                         <Image alt="Github"
+                                        src="/logos/google.svg"
+                                        width={20} height={20}/>
                                         Continue with Google
                                     </Button>
                                 </div>
