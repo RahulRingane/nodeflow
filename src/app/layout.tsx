@@ -1,9 +1,13 @@
-import type { Metadata } from "next";
+ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { TRPCReactProvider } from "@/trpc/client";
 import { Toaster } from "@/components/ui/sonner";
-import { NuqsAdapter } from 'nuqs/adapters/next/app'
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-sidebar";
+import { AppHeader } from "@/components/app-header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,19 +26,34 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <TRPCReactProvider>
           <NuqsAdapter>
-            {children}
+
+            {/* ✅ Sidebar + Layout starts here */}
+            <SidebarProvider>
+              <div className="flex min-h-screen w-full">
+                
+                <AppSidebar />
+
+                <SidebarInset className="flex flex-col w-full">
+
+                  <main className="flex-1">
+                    {children}
+                  </main>
+                </SidebarInset>
+
+              </div>
+            </SidebarProvider>
+
           </NuqsAdapter>
-          <Toaster/>
+
+          <Toaster />
         </TRPCReactProvider>
       </body>
     </html>
