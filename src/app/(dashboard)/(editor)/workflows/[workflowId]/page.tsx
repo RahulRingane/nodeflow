@@ -1,3 +1,13 @@
+import { WorkflowsError, WorkflowsLoading } from "@/features/workflows/components/workflow";
+import { prefetchWorkflow } from "@/features/workflows/server/prefetch";
+import { requireAuth } from "@/lib/auth-utils";
+import { HydrateClient, prefetch } from "@/trpc/server";
+import { ErrorBoundary } from "react-error-boundary";
+import { Suspense } from "react";
+import { Editor, EditorError, EditorLoading } from "@/features/editor/components/editor";
+import { EditorHeader } from "@/features/editor/components/editor-header";
+import { SidebarProvider } from "@/components/ui/sidebar";
+
 interface PageProps {
     params: Promise<{
         workflowId: string
@@ -6,10 +16,23 @@ interface PageProps {
 
 
 const Page = async ({params}: PageProps) => {
+    await requireAuth();
+
     const { workflowId } = await params;
+    prefetchWorkflow(workflowId);  
 
     return (
-        <p> CredId: {workflowId} </p>
+       
+        <HydrateClient>
+                   <ErrorBoundary fallback={<EditorError/>}>
+                       <Suspense fallback={<EditorLoading/>}>
+                       <EditorHeader workflowId={workflowId}/>
+                       <main className="flex-1">
+                         <Editor workflowId={workflowId}/>
+                       </main>
+                       </Suspense>
+                   </ErrorBoundary>
+               </HydrateClient>
     )
 };
  
