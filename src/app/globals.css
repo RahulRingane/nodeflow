@@ -210,3 +210,5 @@
 .react-flow__node.selected #base-node {
   @apply ring-3 ring-muted-foreground/25 shadow-lg;
 }
+
+@import '@xyflow/react/dist/style.css';

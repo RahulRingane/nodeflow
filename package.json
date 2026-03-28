@@ -19,6 +19,7 @@
     "@trpc/client": "^11.13.1",
     "@trpc/server": "^11.13.1",
     "@trpc/tanstack-react-query": "^11.13.1",
+    "@xyflow/react": "^12.10.2",
     "ai": "^6.0.116",
     "auth": "^1.5.5",
     "better": "^0.1.0",

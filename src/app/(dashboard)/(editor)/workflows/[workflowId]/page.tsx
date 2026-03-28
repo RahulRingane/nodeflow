@@ -22,7 +22,7 @@ const Page = async ({params}: PageProps) => {
     prefetchWorkflow(workflowId);  
 
     return (
-       
+       <div className="h-screen flex flex-col">
         <HydrateClient>
                    <ErrorBoundary fallback={<EditorError/>}>
                        <Suspense fallback={<EditorLoading/>}>
@@ -33,6 +33,7 @@ const Page = async ({params}: PageProps) => {
                        </Suspense>
                    </ErrorBoundary>
                </HydrateClient>
+        </div>
     )
 };
  
