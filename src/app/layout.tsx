@@ -4,6 +4,7 @@ import "./globals.css";
 import { TRPCReactProvider } from "@/trpc/client";
 import { Toaster } from "@/components/ui/sonner";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { Provider } from "jotai";
 
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
@@ -42,10 +43,11 @@ export default function RootLayout({
                 <AppSidebar />
 
                 <SidebarInset className="flex flex-col w-full">
-
+                <Provider>
                   <main className="flex-1">
                     {children}
                   </main>
+                </Provider>
                 </SidebarInset>
 
               </div>
